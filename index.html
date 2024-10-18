@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Philips Iron: Powerful Steam Output & Non-stick Soleplate | My E-commerce Store</title>
-    <meta name="description" content="Experience efficient ironing with the Philips Iron. Features include powerful steam output, non-stick soleplate, and lightweight design. 2-year warranty included. Shop now!">
+    
+    <!-- Updated Meta Description -->
+    <meta name="description" content="Experience efficient ironing with the Philips Iron. This iron features a powerful steam output, a non-stick soleplate, and a lightweight design. It includes a 2-year warranty. Shop now!">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://www.myecommercestore.com/products/philips-iron">
     <meta name="robots" content="index, follow">
+
+    <!-- Facebook Open Graph Meta Tags -->
+    <meta property="og:title" content="Philips Iron: Powerful Steam Output & Non-stick Soleplate">
+    <meta property="og:description" content="Experience efficient ironing with the Philips Iron. Features include powerful steam output, non-stick soleplate, and lightweight design. Shop now!">
+    <meta property="og:image" content="https://www.myecommercestore.com/images/philips-iron.jpg">
+    <meta property="og:url" content="https://www.myecommercestore.com/products/philips-iron">
+    <meta property="og:type" content="product">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Philips Iron: Powerful Steam Output & Non-stick Soleplate">
+    <meta name="twitter:description" content="Efficient ironing with Philips Iron. Powerful steam output and non-stick soleplate. Shop now!">
+    <meta name="twitter:image" content="https://www.myecommercestore.com/images/philips-iron.jpg">
+    <meta name="twitter:site" content="@MyEcommerceStore">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="url_to_my_favicon" />
 
     <!-- Critical CSS -->
     <style>
@@ -19,6 +38,9 @@
         .max-w-4xl { max-width: 56rem; }
         .rounded-lg { border-radius: 0.5rem; }
         .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        nav ul { display: flex; gap: 1rem; list-style: none; }
+        nav ul li a { text-decoration: none; color: #3b82f6; font-weight: bold; }
+        nav ul li a:hover { color: #1d4ed8; }
     </style>
 
     <!-- Preload and defer stylesheets for better performance -->
@@ -55,14 +77,25 @@
 <body class="bg-gray-100 text-gray-800">
     <header class="bg-white p-4 shadow-md">
         <h1 class="text-3xl font-bold">My E-commerce Store</h1>
-        
+        <!-- Navbar -->
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#product">Product</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#similar-products">Similar Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
+
     <main class="max-w-4xl mx-auto mt-8 p-4 bg-white rounded-lg shadow-lg">
-        <section class="flex flex-col lg:flex-row">
+        <!-- Home Section -->
+        <section id="home" class="flex flex-col lg:flex-row">
             <div class="flex-1">
                 <img src="/images/w3.jpg" 
                      alt="Philips Iron with powerful steam output and non-stick soleplate" 
-                     class="w-full rounded-lg" loading="lazy" width="400" height="400">
+                     class="w-full rounded-lg" loading="lazy" width="400" height="400"> <!-- Added width and height -->
             </div>
             <div class="flex-1 lg:ml-8">
                 <h2 class="text-2xl font-bold mb-4">Philips Iron</h2>
@@ -77,7 +110,9 @@
                 <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" aria-label="Add Philips Iron to Cart">Add to Cart</button>
             </div>
         </section>
-        <section class="mt-8">
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="mt-8">
             <h3 class="text-xl font-semibold mb-4">Customer Reviews</h3>
             <div class="bg-gray-50 p-4 rounded-lg mb-4">
                 <p class="font-semibold">John Doe</p>
@@ -90,33 +125,48 @@
                 <p class="text-gray-700">Good value for the price. The soleplate glides smoothly over fabrics.</p>
             </div>
         </section>
-        <section class="mt-8">
+
+        <!-- Similar Products Section -->
+        <section id="similar-products" class="mt-8">
             <h3 class="text-xl font-semibold mb-4">Similar Products</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-white p-4 rounded-lg shadow-lg">
                     <img src="/images/w4.jpg" 
                          alt="Philips Steam Iron with advanced features" 
-                         class="w-full rounded-lg mb-4" loading="lazy" width="200" height="200">
+                         class="w-full rounded-lg mb-4" loading="lazy" width="200" height="200"> <!-- Added width and height -->
                     <h4 class="text-lg font-semibold">Philips Steam Iron</h4>
                     <p class="text-gray-600 mb-2">Price: $59.99</p>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Details</button>                </div>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Details</button>
+                </div>
                 <div class="bg-white p-4 rounded-lg shadow-lg">
                     <img src="/images/w5.jpg" 
                          alt="Philips Dry Iron for basic ironing needs" 
-                         class="w-full rounded-lg mb-4" loading="lazy" width="200" height="200">
+                         class="w-full rounded-lg mb-4" loading="lazy" width="200" height="200"> <!-- Added width and height -->
                     <h4 class="text-lg font-semibold">Philips Dry Iron</h4>
                     <p class="text-gray-600 mb-2">Price: $39.99</p>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Details</button>                </div>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Details</button>
+                </div>
                 <div class="bg-white p-4 rounded-lg shadow-lg">
                     <img src="/images/w6.jpg" 
                          alt="Philips Garment Steamer for quick touch-ups" 
-                         class="w-full rounded-lg mb-4" loading="lazy" width="200" height="200">
+                         class="w-full rounded-lg mb-4" loading="lazy" width="200" height="200"> <!-- Added width and height -->
                     <h4 class="text-lg font-semibold">Philips Garment Steamer</h4>
                     <p class="text-gray-600 mb-2">Price: $69.99</p>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Details</button>                </div>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Details</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media Section -->
+        <section id="social-media" class="mt-8">
+            <h3 class="text-xl font-semibold mb-4">Connect with Us</h3>
+            <div class="flex gap-4">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.myecommercestore.com/products/philips-iron" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded">Share on Facebook</a>
+                <a href="https://twitter.com/intent/tweet?url=https://www.myecommercestore.com/products/philips-iron" target="_blank" class="bg-blue-400 text-white px-4 py-2 rounded">Tweet</a>
             </div>
         </section>
     </main>
+
     <footer class="bg-white p-4 shadow-md mt-8" role="contentinfo">
         <p class="text-center">© 2024 My E-commerce Store. All rights reserved.</p>
     </footer>
