@@ -1,96 +1,96 @@
-// ========== Hidden Terminal Access ==========
-document.getElementById("terminal-icon").addEventListener("click", () => {
-  const terminal = document.createElement("div");
-  terminal.className = "terminal-overlay";
+document.addEventListener("DOMContentLoaded", function () {
+  // ========== Hidden Terminal Access ==========
+  document.getElementById("terminal-icon").addEventListener("click", () => {
+    const terminal = document.createElement("div");
+    terminal.className = "terminal-overlay";
 
-  terminal.innerHTML = `
-    <div id="terminal-output">
-      <div>> Welcome to Anuj's Hidden Terminal</div>
-      <div>> Type 'help' to see available commands</div>
-      <br>
-    </div>
-    <div>
-      <span>> </span>
-      <input id="terminal-input" autocomplete="off" autofocus />
-    </div>
-  `;
+    terminal.innerHTML = `
+      <div id="terminal-output">
+        <div>> Welcome to Anuj's Hidden Terminal</div>
+        <div>> Type 'help' to see available commands</div>
+        <br>
+      </div>
+      <div>
+        <span>> </span>
+        <input id="terminal-input" autocomplete="off" autofocus />
+      </div>
+    `;
 
-  document.body.appendChild(terminal);
+    document.body.appendChild(terminal);
 
-  const input = terminal.querySelector("#terminal-input");
-  const output = terminal.querySelector("#terminal-output");
+    const input = terminal.querySelector("#terminal-input");
+    const output = terminal.querySelector("#terminal-output");
 
-  input.focus();
+    input.focus();
 
-  let isExiting = false;
+    let isExiting = false;
 
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      if (isExiting) {
-        e.preventDefault();
-        return;
-      }
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        if (isExiting) {
+          e.preventDefault();
+          return;
+        }
 
-      const command = input.value.trim().toLowerCase();
-      input.value = "";
+        const command = input.value.trim().toLowerCase();
+        input.value = "";
 
-      appendOutput(`> ${command}`, output);
+        appendOutput(`> ${command}`, output);
 
-      const shouldExit = handleCommand(command, output);
+        const shouldExit = handleCommand(command, output);
 
-      if (shouldExit) {
-        isExiting = true;
-        input.disabled = true;
-        appendOutput("Exiting terminal and returning to homepage...", output);
+        if (shouldExit) {
+          isExiting = true;
+          input.disabled = true;
+          appendOutput("Exiting terminal and returning to homepage...", output);
 
-      setTimeout(() => {
+          setTimeout(() => {
+            terminal.remove();
+            window.location.href = "/";
+          }, 1000);
+        }
+
+        terminal.scrollTop = terminal.scrollHeight;
+      } else if (e.key === "Escape") {
         terminal.remove();
-        document.querySelector("main").style.display = "block"; // example: show your home section
-      }, 1000);
-
       }
+    });
 
-      // Scroll to bottom after adding output
-      terminal.scrollTop = terminal.scrollHeight;
-    } else if (e.key === "Escape") {
-      terminal.remove();
+    function appendOutput(text, container) {
+      const div = document.createElement("div");
+      div.innerHTML = text;
+      container.appendChild(div);
+    }
+
+    function handleCommand(cmd, output) {
+      switch (cmd) {
+        case "projects":
+          appendOutput("- Comic Guide Web App<br>- Sales Dashboard (Power BI)<br>- Swastha Sewa UI Design<br>", output);
+          break;
+        case "resume":
+          appendOutput("Downloading resume...", output);
+          window.open("assets/Anuj_Parajuli_Resume.pdf", "_blank");
+          break;
+        case "skills":
+          appendOutput("Frontend: HTML, CSS, JavaScript, React<br>Design: Figma, Canva<br>Data: Excel, Power BI<br>", output);
+          break;
+        case "contact":
+          appendOutput("📧 anuj.parajulisep23@cps.edu.np<br>📞 +977 9746235377<br>", output);
+          break;
+        case "help":
+          appendOutput("Available commands:<br>- projects<br>- resume<br>- skills<br>- contact<br>- clear<br>- exit<br>", output);
+          break;
+        case "clear":
+          output.innerHTML = "";
+          break;
+        case "exit":
+          return true; // signal exit
+        default:
+          appendOutput("Unknown command. Type 'help' for options.", output);
+      }
+      return false;
     }
   });
-
-  function appendOutput(text, container) {
-    const div = document.createElement("div");
-    div.innerHTML = text;
-    container.appendChild(div);
-  }
-
-  function handleCommand(cmd, output) {
-    switch (cmd) {
-      case "projects":
-        appendOutput("- Comic Guide Web App<br>- Sales Dashboard (Power BI)<br>- Swastha Sewa UI Design<br>", output);
-        break;
-      case "resume":
-        appendOutput("Downloading resume...", output);
-        window.open("assets/Anuj_Parajuli_Resume.pdf", "_blank");
-        break;
-      case "skills":
-        appendOutput("Frontend: HTML, CSS, JavaScript, React<br>Design: Figma, Canva<br>Data: Excel, Power BI<br>", output);
-        break;
-      case "contact":
-        appendOutput("📧 anuj.parajulisep23@cps.edu.np<br>📞 +977 9746235377<br>", output);
-        break;
-      case "help":
-        appendOutput("Available commands:<br>- projects<br>- resume<br>- skills<br>- contact<br>- clear<br>- exit<br>", output);
-        break;
-      case "clear":
-        output.innerHTML = "";
-        break;
-      case "exit":
-        return true; // signal exit
-      default:
-        appendOutput("Unknown command. Type 'help' for options.", output);
-    }
-    return false;
-  }
 });
 
 
