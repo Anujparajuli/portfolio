@@ -1,13 +1,14 @@
-// ========== 1. Hidden Terminal Access ==========
-
-// Terminal Icon Click
+// ========== Hidden Terminal Access ==========
 document.getElementById("terminal-icon").addEventListener("click", () => {
   const terminal = document.createElement("div");
   terminal.className = "terminal-overlay";
 
   terminal.innerHTML = `
-    <div id="terminal-output">> Welcome to Anuj's Hidden Terminal<br>
-    > Type 'help' to see available commands<br><br></div>
+    <div id="terminal-output">
+      <div>> Welcome to Anuj's Hidden Terminal</div>
+      <div>> Type 'help' to see available commands</div>
+      <br>
+    </div>
     <div>
       <span>> </span>
       <input id="terminal-input" autocomplete="off" autofocus />
@@ -21,44 +22,76 @@ document.getElementById("terminal-icon").addEventListener("click", () => {
 
   input.focus();
 
+  let isExiting = false;
+
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
+      if (isExiting) {
+        e.preventDefault();
+        return;
+      }
+
       const command = input.value.trim().toLowerCase();
-      output.innerHTML += `> ${command}<br>`;
-      handleCommand(command, output);
       input.value = "";
+
+      appendOutput(`> ${command}`, output);
+
+      const shouldExit = handleCommand(command, output);
+
+      if (shouldExit) {
+        isExiting = true;
+        input.disabled = true;
+        appendOutput("Exiting terminal and returning to homepage...", output);
+
+      setTimeout(() => {
+        terminal.remove();
+        document.querySelector("main").style.display = "block"; // example: show your home section
+      }, 1000);
+
+      }
+
+      // Scroll to bottom after adding output
+      terminal.scrollTop = terminal.scrollHeight;
     } else if (e.key === "Escape") {
-      terminal.remove(); // Press Esc to close
+      terminal.remove();
     }
   });
-});
 
-// Command Handler
-function handleCommand(cmd, output) {
-  switch (cmd) {
-    case "projects":
-      output.innerHTML += "- Comic Guide Web App<br>- Sales Dashboard (Power BI)<br>- Swastha Sewa UI Design<br><br>";
-      break;
-    case "resume":
-      output.innerHTML += "Downloading resume...<br><br>";
-      window.open("assets/Anuj_Parajuli_Resume.pdf", "_blank"); // Adjust path as needed
-      break;
-    case "skills":
-      output.innerHTML += "Frontend: HTML, CSS, JavaScript, React<br>Design: Figma, Canva<br>Data: Excel, Power BI<br><br>";
-      break;
-    case "contact":
-      output.innerHTML += "📧 anuj.parajulisep23@cps.edu.np<br>📞 +977 9746235377<br><br>";
-      break;
-    case "help":
-      output.innerHTML += "Available commands:<br>- projects<br>- resume<br>- skills<br>- contact<br>- clear<br><br>";
-      break;
-    case "clear":
-      output.innerHTML = "";
-      break;
-    default:
-      output.innerHTML += "Unknown command. Type 'help' for options.<br><br>";
+  function appendOutput(text, container) {
+    const div = document.createElement("div");
+    div.innerHTML = text;
+    container.appendChild(div);
   }
-}
+
+  function handleCommand(cmd, output) {
+    switch (cmd) {
+      case "projects":
+        appendOutput("- Comic Guide Web App<br>- Sales Dashboard (Power BI)<br>- Swastha Sewa UI Design<br>", output);
+        break;
+      case "resume":
+        appendOutput("Downloading resume...", output);
+        window.open("assets/Anuj_Parajuli_Resume.pdf", "_blank");
+        break;
+      case "skills":
+        appendOutput("Frontend: HTML, CSS, JavaScript, React<br>Design: Figma, Canva<br>Data: Excel, Power BI<br>", output);
+        break;
+      case "contact":
+        appendOutput("📧 anuj.parajulisep23@cps.edu.np<br>📞 +977 9746235377<br>", output);
+        break;
+      case "help":
+        appendOutput("Available commands:<br>- projects<br>- resume<br>- skills<br>- contact<br>- clear<br>- exit<br>", output);
+        break;
+      case "clear":
+        output.innerHTML = "";
+        break;
+      case "exit":
+        return true; // signal exit
+      default:
+        appendOutput("Unknown command. Type 'help' for options.", output);
+    }
+    return false;
+  }
+});
 
 
 // ========== 2. Glitch Triggered Theme Shift ==========
