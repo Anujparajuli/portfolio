@@ -1,18 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // ========== Hidden Terminal Access ==========
-  document.getElementById("terminal-icon").addEventListener("click", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const terminalIcon = document.getElementById("terminal-icon");
+
+  if (!terminalIcon) return;
+
+  terminalIcon.addEventListener("click", () => {
     const terminal = document.createElement("div");
     terminal.className = "terminal-overlay";
 
     terminal.innerHTML = `
       <div id="terminal-output">
         <div>> Welcome to Anuj's Hidden Terminal</div>
-        <div>> Type 'help' to see available commands</div>
-        <br>
+        <div>> Type 'help' to see available commands</div><br>
       </div>
       <div>
         <span>> </span>
-        <input id="terminal-input" autocomplete="off" autofocus />
+        <input id="terminal-input" autocomplete="off" />
       </div>
     `;
 
@@ -21,16 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const input = terminal.querySelector("#terminal-input");
     const output = terminal.querySelector("#terminal-output");
 
-    input.focus();
+    // Ensure focus after a short delay (fixes GitHub Pages focus issue)
+    setTimeout(() => input.focus(), 50);
 
     let isExiting = false;
 
     input.addEventListener("keydown", function (e) {
       if (e.key === "Enter") {
-        if (isExiting) {
-          e.preventDefault();
-          return;
-        }
+        if (isExiting) return;
 
         const command = input.value.trim().toLowerCase();
         input.value = "";
@@ -44,9 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
           input.disabled = true;
           appendOutput("Exiting terminal and returning to homepage...", output);
 
+
           setTimeout(() => {
-            terminal.remove();
-            window.location.href = "/";
+          terminal.remove();
+          window.location.reload(); // ✅ Safely reloads your current page
           }, 1000);
         }
 
@@ -84,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
           output.innerHTML = "";
           break;
         case "exit":
-          return true; // signal exit
+          return true;
         default:
           appendOutput("Unknown command. Type 'help' for options.", output);
       }
@@ -92,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
 
 // ========== 2. Glitch Triggered Theme Shift ==========
 
